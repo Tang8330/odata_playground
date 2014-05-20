@@ -37,5 +37,5 @@ require('./routes.js')(app);
 
 // Configure passport
 http.createServer(app).listen(8080, '0.0.0.0', function() {
-    console.log("Express server listening on %s:%d in %s mode", '192.168.0.14', 3000, app.settings.env);
+    console.log("Express server listening on %s:%d in %s mode", '0.0.0.0', 8080, app.settings.env);
 });
