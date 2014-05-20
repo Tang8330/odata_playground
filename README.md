@@ -1,8 +1,5 @@
-## MixDat
+## Robin's OData Sandbox
 ### About
-MixDat is a GitHub project created by Robin Tang Reese Garth.
-It was made to to explore and demonstrate the power of the MEAN stack (MongoDB, Express, AngularJS, NodeJS).
-
+The pupose of this repo is to familiarize myself with the technology like OData, Knockout, sammy, etc.
 ### Contact
-
-For more information on AngularJS please check out http://angularjs.org/
+Twitter @tang8330, email tang8330@mylaurier.ca
