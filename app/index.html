@@ -6,12 +6,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>knockout seed</title>
+        <title>Robin</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/app.css">
         <!-- endbuild -->
     </head>
  
@@ -20,9 +22,11 @@
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
         <script src="bower_components/knockout.js/knockout.js"></script>
+		<script src="scripts/mustache.js"></script>
 		<script src="scripts/sammy-latest.min.js"></script>
 		<script src="scripts/sammy.mustache.js"></script>
 		<script src="scripts/sammy.title.js"></script>
+		<script src="scripts/bootstrap.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -31,7 +35,7 @@
         <script src="scripts/main.js"></script>
 		
         <!-- endbuild -->
-
+		
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/sass-bootstrap/js/affix.js"></script>
         <script src="bower_components/sass-bootstrap/js/alert.js"></script>
@@ -51,16 +55,22 @@
     ;(function($) {
       var app = Sammy('#temp_spot', function() {
         
-		this.use(Sammy.Mustache, 'html').use(Sammy.Title);
-
-        this.get('#/', function() {
-          $('#temp_spot').html('nothing to see here!');
-        });
-
+		this.use("Mustache");
+		
+		this.get("#/", function() {
+			this.render("home.mustache", function(template) {
+				$("#temp_spot").html(template);
+				removeActives();
+				$("#home").addClass("active");
+			});
+		});
+		
         this.get('#/users', function() {
-          this.partial('users.mustache', whos, function(html) {
-            $('#temp_spot').html(html);
-          });
+			this.render('users.mustache', {whos : whos}, function(template) {
+			$("#temp_spot").html(template);
+			removeActives();
+			$("#users").addClass("active");
+			});
         });
 
         this.get('#/what', function() {
@@ -68,27 +78,38 @@
             $('#temp_spot').html(html);
           });
         });
-
+		
+		this.post('#/', function() { 
+			console.log('yo mang');
+			return false;
+		});
       });
 
       $(function() {
         app.run('#/');
       });
     })(jQuery);
+	
+	function removeActives() {
+		$("#users").removeClass("active");
+		$("#home").removeClass("active");
+	}
   </script>
   
 	<body>
-		<div class="container" id="container">
+		<div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="#/">Home</a></li>
-					<li><a href="#/users">Users</a></li>
+					<li id="home" class="active"><a href="#/">Home</a></li>
+					<li id="users"><a href="#/users">Users</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
-				<h3 class="text-muted">knockout seed</h3>
+				<h3 class="text-muted">Robin's Sandbox</h3>
 			</div>
-			<div id="temp_spot"> </div>
-			<div class="jumbotron">
+			<div id="temp_spot">
+				
+			</div>
+			<div>
 				<h1 data-bind="text: greetings"></h1>
 				<p class="lead" data-bind="text: message"></p>
 				<p><a class="btn btn-lg btn-success" href="#" data-bind="text: successMessage"></a></p>
