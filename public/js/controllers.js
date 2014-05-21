@@ -14,3 +14,7 @@ mixDatUp.controller('AlcoholicDrinksCtrl', ['$scope', '$http', function ($scope,
     }
   });
 }]);
+
+function Ctrl($scope) {
+	$scope.user = {};
+}

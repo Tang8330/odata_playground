@@ -21,7 +21,7 @@ app.configure(function(){
     app.use(express.session());
 
 	app.use(app.router);
-	app.use(express.static(path.join(__dirname, 'public')));
+	app.use(express.static(path.join(__dirname, 'app')));
 	app.use( errorHandler.httpError(404) );
 	app.use( handler );
 });
