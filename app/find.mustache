@@ -1,16 +1,12 @@
 <div class="row">
 	<div class="col-xs-12">
 		<h3><b>Main Navigation</b></h3>
-		<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add User</button>
-		<button class="btn btn-success" id="find">Find a User</button>
+	
+	<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add User</button>
+	<a class="btn btn-success" href="#/find">Find a User</a>
+	
 	</div>
-</div>
-<div class="row">
-		<form class="col-xs-9 hidden searchUser" action="#/find" method="POST">
-			<input type="text" class="sm-top-buffer form-control" placeholder="Search on ID, First Name, Last Name, Phone Number, Email">
-		</form>
-</div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -32,9 +28,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	$(document.body).on('click', '#find', function() {
-		$(".searchUser").removeClass("hidden");
-	});
-</script>

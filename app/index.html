@@ -51,8 +51,7 @@
         <script src="bower_components/sass-bootstrap/js/tab.js"></script>
         <!-- endbuild -->
 		<script>
-		var whos = "me";
-    ;(function($) {
+		$(function() {
       var app = Sammy('#temp_spot', function() {
         
 		this.use("Mustache");
@@ -65,8 +64,16 @@
 			});
 		});
 		
+		this.get("#/find", function() {
+			this.render("find.mustache", function(template) {
+				$("#temp_spot").html(template);
+				removeActives();
+				$("#home").addClass("active");
+			});
+		});
+		
         this.get('#/users', function() {
-			this.render('users.mustache', {whos : whos}, function(template) {
+			this.render('users.mustache', {whos : "me"}, function(template) {
 			$("#temp_spot").html(template);
 			removeActives();
 			$("#users").addClass("active");
@@ -79,17 +86,24 @@
           });
         });
 		
-		this.post('#/', function() { 
-			console.log('yo mang');
-			return false;
+		this.post('#/', function(context) {
+			var query = new Object();
+			query.firstName = context.params['firstName'];
+			query.lastName = context.params['lastName'];
+			query.phoneNumber = context.params['phoneNumber'];
+			query.email = context.params['email'];
+			
+			//post
+			$.post( "/new/user", { data : query}, function() {
+				location.reload(); //refresh page
+			});
 		});
       });
 
       $(function() {
         app.run('#/');
       });
-    })(jQuery);
-	
+    });
 	function removeActives() {
 		$("#users").removeClass("active");
 		$("#home").removeClass("active");
@@ -106,17 +120,7 @@
 				</ul>
 				<h3 class="text-muted">Robin's Sandbox</h3>
 			</div>
-			<div id="temp_spot">
-				
-			</div>
-			<div>
-				<h1 data-bind="text: greetings"></h1>
-				<p class="lead" data-bind="text: message"></p>
-				<p><a class="btn btn-lg btn-success" href="#" data-bind="text: successMessage"></a></p>
-			</div>
-			<div class="footer">
-				<p>♥ from the Yeoman team</p>
-			</div>
+			<div id="temp_spot"></div>
 			
 		</div>
 		

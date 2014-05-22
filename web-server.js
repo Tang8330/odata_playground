@@ -1,6 +1,7 @@
 var express = require('express'),
 	path = require('path'),
-	http = require('http');
+	http = require('http'),
+	mongoose = require("mongoose");
 	
 
 var app = express();
@@ -33,6 +34,8 @@ app.configure('development', function() {
 app.configure('production', function() {
     app.use(express.errorHandler());
 });
+
+mongoose.connect('mongodb://localhost/sandbox');
 require('./routes.js')(app);
 
 // Configure passport

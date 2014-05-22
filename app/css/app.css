@@ -2,6 +2,9 @@
 .sep-line {
 	display:block;
 }
+.hidden {
+	display: none;
+}
 .sm-top-buffer {
 	margin-top: 5px;
 }
